@@ -35,7 +35,7 @@ class BehatVariablesArgumentTransformer implements ArgumentTransformer {
 	 */
 	public function supportsDefinitionAndArgument(DefinitionCall $definitionCall, $argumentIndex, $argumentValue) {
 		return
-			(($argumentValue instanceof PyStringNode || is_scalar($argumentValue || $argumentValue instanceof TableNode)) &&
+			(($argumentValue instanceof PyStringNode || is_scalar($argumentValue) || $argumentValue instanceof TableNode) &&
 			preg_match_all(self::SLOT_NAME_REGEX, serialize($argumentValue), $this->matches, PREG_SET_ORDER));
 	}
 
