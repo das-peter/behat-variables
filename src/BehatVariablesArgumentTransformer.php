@@ -34,16 +34,15 @@ class BehatVariablesArgumentTransformer implements ArgumentTransformer {
 	 *
 	 */
 	public function supportsDefinitionAndArgument(DefinitionCall $definitionCall, $argumentIndex, $argumentValue) {
-	    // Check if we got a supported data type.
-	    if (($argumentValue instanceof PyStringNode || is_scalar($argumentValue) || $argumentValue instanceof TableNode)) {
-            // Check if there's a valid token in the data.
-            try {
-                return (bool) preg_match_all(self::SLOT_NAME_REGEX, (string) $argumentValue, $this->matches, PREG_SET_ORDER);
-            } finally {
-                // Failure means we can't use the value.
-            }
-        }
-	    return FALSE;
+		if ($argumentValue instanceof PyStringNode || is_scalar($argumentValue)) {
+			return (bool) preg_match_all(self::SLOT_NAME_REGEX, (string) $argumentValue, $this->matches, PREG_SET_ORDER);
+		}
+
+		if ($argumentValue instanceof TableNode) {
+			return (bool) preg_match_all(self::SLOT_NAME_REGEX, (string) $argumentValue, $this->matches, PREG_SET_ORDER);
+		}
+
+		return false;
 	}
 
 	/**
