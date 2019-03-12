@@ -6,7 +6,6 @@ use Behat\Behat\Definition\Call\DefinitionCall;
 use Behat\Behat\Transformation\Transformer\ArgumentTransformer;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
-use Doctrine\DBAL\Schema\Table;
 
 class BehatVariablesArgumentTransformer implements ArgumentTransformer {
 
